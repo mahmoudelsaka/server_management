@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+	<record id="database_info_tree" model="ir.ui.view">
+		<field name="name">database.info.tree</field>
+		<field name="model">database.info</field>
+		<field name="arch" type="xml">
+			<tree string="Database Info">
+				<field name="sequence" widget="handle"/>
+				<field name="server_info_id" />
+				<field name="name" />
+				<field name="db_password"  />
+				<field name="version" />
+				<field name="note" />
+			</tree>
+		</field>
+	</record>
+	<record id="database_info_form" model="ir.ui.view">
+		<field name="name">database.info.form</field>
+		<field name="model">database.info</field>
+		<field name="arch" type="xml">
+			<form string="Database Info">
+				<sheet>
+					<group col="2">
+						<group>
+							<field name="server_info_id" />
+							<field name="name" />
+							<field name="db_password"  />
+							<field name="web_link"  />
+						</group>
+						<group>
+							<field name="ip" readonly="1"/>
+							<field name="sequence" />
+							<field name="version" />
+						</group>
+					</group>
+					<notebook>
+						<page string="Allowed Users" groups="server_management.group_server_management_all">
+							<field name="user_ids" options="{'not_delete': True}">
+								<kanban quick_create="false" create="true" delete="true">
+									<field name="id" />
+									<field name="name" />
+									<templates>
+										<t t-name="kanban-box">
+											<div class="oe_kanban_global_click" style="max-width: 200px">
+												<div class="o_kanban_record_top">
+													<img
+														t-att-src="kanban_image('res.users', 'image_small', record.id.raw_value)"
+														height="40" width="40" class="oe_avatar oe_kanban_avatar_smallbox mb0"
+														alt="Avatar" />
+													<div class="o_kanban_record_headings ml8">
+														<strong class="o_kanban_record_title">
+															<field name="name" />
+														</strong>
+													</div>
+												</div>
+											</div>
+										</t>
+									</templates>
+								</kanban>
+							</field>
+						</page>
+						<page string="Notes">
+							<field name="note" placeholder="Add notes here..."/>
+						</page>
+					</notebook>
+				</sheet>
+				<div class="oe_chatter">
+					<field name="message_follower_ids" widget="mail_followers"
+						groups="base.group_user" />
+					<field name="message_ids" widget="mail_thread" />
+				</div>
+			</form>
+		</field>
+	</record>
+	<record model="ir.ui.view" id="database_info_search">
+		<field name="name">database.info.search</field>
+		<field name="model">database.info</field>
+		<field name="arch" type="xml">
+			<search string="Database Information" >
+				<field name="name" />
+				<field name="server_info_id"/>
+				<field name="note"/>
+				<separator />
+				<group expand="0" string="Group By">
+					<filter name="group_version" string="Odoo-Version" context="{'group_by':'version'}" />
+					<filter name="group_server_info" string="Server" context="{'group_by':'server_info_id'}" />
+				</group>
+			</search>
+		</field>
+	</record>
+	<record id="database_info_action" model="ir.actions.act_window">
+		<field name="name">Databases</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">database.info</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="view_id" ref="database_info_tree"/>
+		<field name="search_view_id" ref="database_info_search"/>
+	</record>
+
+	<menuitem id="database_info_menu" action="database_info_action" sequence="25"
+		parent="menu_sub_server_management" groups="server_management.group_server_management_analyst" />
+
+	</data>
+</odoo>

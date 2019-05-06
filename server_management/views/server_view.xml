@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+
+	<menuitem id="menu_sub_server_management" name="Server Management" 
+		parent="hr.menu_hr_root" sequence="101"/>
+
+	<record id="server_info_tree" model="ir.ui.view">
+		<field name="name">server.info.tree</field>
+		<field name="model">server.info</field>
+		<field name="arch" type="xml">
+			<tree string="Server Info" >
+				<field name="sequence" widget="handle"/>
+				<field name="name" />
+				<field name="version" />
+				<field name="ssh_user" />
+				<field name="ip" />
+				<field name="ssh_password" />
+				<field name="ssh_command" />
+				<field name="master_password"/>
+				<field name="inhouse" />
+				<field name="note" />
+			</tree>
+		</field>
+	</record>
+	<record id="server_info_form" model="ir.ui.view">
+		<field name="name">server.info.form</field>
+		<field name="model">server.info</field>
+		<field name="arch" type="xml">
+			<form string="Server Info">
+				<sheet>
+					<group col="2">
+						<group>
+							<field name="name" />
+							<field name="ssh_user" />
+							<field name="ip" />
+							<field name="ssh_password" />
+							<field name="master_password"/>
+						</group>
+						<group>
+							<field name="ssh_command" />
+							<field name="version" />
+							<field name="inhouse" />
+							<field name="sequence" />
+							<field name="ip_type" widget="radio"/>
+						</group>
+					</group>
+					<notebook>
+						<page string="Allowed Users" groups="server_management.group_server_management_all">
+							<field name="user_ids" options="{'not_delete': True}">
+								<kanban quick_create="false" create="true" delete="true">
+									<field name="id" />
+									<field name="name" />
+									<templates>
+										<t t-name="kanban-box">
+											<div class="oe_kanban_global_click" style="max-width: 200px">
+												<div class="o_kanban_record_top">
+													<img
+														t-att-src="kanban_image('res.users', 'image_small', record.id.raw_value)"
+														height="40" width="40" class="oe_avatar oe_kanban_avatar_smallbox mb0"
+														alt="Avatar" />
+													<div class="o_kanban_record_headings ml8">
+														<strong class="o_kanban_record_title">
+															<field name="name" />
+														</strong>
+													</div>
+												</div>
+											</div>
+										</t>
+									</templates>
+								</kanban>
+							</field>
+						</page>
+						<page string="Notes">
+							<field name="note" placeholder="Add notes here..."/>
+						</page>
+					</notebook>
+				</sheet>
+				<div class="oe_chatter">
+					<field name="message_follower_ids" widget="mail_followers"
+						groups="base.group_user" />
+					<field name="message_ids" widget="mail_thread" />
+				</div>
+			</form>
+		</field>
+	</record>
+	<record model="ir.ui.view" id="server_info_search">
+		<field name="name">server.info.search</field>
+		<field name="model">server.info</field>
+		<field name="arch" type="xml">
+			<search string="Server Information" >
+				<field name="name" />
+				<field name="ip"/>
+				<field name="ssh_user"/>
+				<field name="note"/>
+				<separator />
+				<group expand="0" string="Group By">
+					<filter name="group_version" string="Odoo-Version" context="{'group_by':'version'}" />
+					<filter name="group_inhouse" string="In-house" context="{'group_by':'inhouse'}" />
+				</group>
+			</search>
+		</field>
+	</record>
+	<record id="server_info_action" model="ir.actions.act_window">
+		<field name="name">Servers</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">server.info</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="view_id" ref="server_info_tree"/>
+		<field name="search_view_id" ref="server_info_search"/>
+	</record>
+
+	<menuitem id="server_info_menu" action="server_info_action" sequence="20"
+		parent="menu_sub_server_management" groups="server_management.group_server_management_developer" />
+
+	</data>
+</odoo>

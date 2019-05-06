@@ -1,0 +1,61 @@
+*.pyo
+*.pyc
+*.*~
+
+#eclipse ignored files
+/.project
+/.pydevproject
+/.settings/*
+.classpath
+.project
+.settings/
+*.pydevproject
+
+# Office Temp Files
+*.~lock*
+.~lock*
+*/.~lock*
+
+# backup and temporary files
+*~
+*.swp
+.*.sw[op]
+
+*.py[cod]
+
+# C extensions
+*.so
+
+# Packages
+*.egg
+*.egg-info
+dist
+build
+eggs
+parts
+bin
+var
+sdist
+develop-eggs
+.installed.cfg
+lib
+lib64
+
+# Installer logs
+pip-log.txt
+
+# Unit test / coverage reports
+.coverage
+.tox
+nosetests.xml
+
+# Translations
+*.mo
+
+# Mr Developer
+.mr.developer.cfg
+.project
+.pydevproject
+
+# PyCharm
+.idea/
