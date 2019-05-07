@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': 'Elsaka Server Management',
+    'name': 'Server Management',
     'version': '11.0',
     'category': 'Management',
     'description': """
