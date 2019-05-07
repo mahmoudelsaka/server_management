@@ -2,7 +2,7 @@
 {
     'name': 'Server Management',
     'version': '12.0',
-    'category': 'Management',
+    'category': 'Employee',
     'description': """
 Managing Company's Servers:
 * Server Management Menu: Human Resources >> Server Management >> Server Management
