@@ -2,13 +2,13 @@
 {
     'name': 'Server Management',
     'version': '11.0',
-    'category': 'Management',
+    'category': 'Employee',
     'description': """
 Managing Company's Servers:
 * Server Management Menu: Human Resources >> Server Management >> Server Management
 * Server Management Groups configurable from user profile: Server Access: Limited and Server Access: Full
     """,
-    'author': 'Rightechs Solution',
+    'author': 'Rightechs Solutions',
     'website': 'rightechs.net',
     'depends': ['base', 'hr'],
     'data': [
