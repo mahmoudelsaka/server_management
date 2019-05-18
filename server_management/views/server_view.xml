@@ -2,9 +2,13 @@
 <odoo>
 	<data>
 
+	<menuitem id="menu_main_server_management" name="Server Management" 
+		 sequence="101"/>
+        
 	<menuitem id="menu_sub_server_management" name="Server Management" 
-		parent="hr.menu_hr_root" sequence="101"/>
-
+		parent="menu_main_server_management"/>
+	
+		
 	<record id="server_info_tree" model="ir.ui.view">
 		<field name="name">server.info.tree</field>
 		<field name="model">server.info</field>
